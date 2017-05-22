@@ -160,9 +160,6 @@ if( file_exists(__DIR__ . '/libs/shortcodes.php')) {
     require_once __DIR__ . '/libs/shortcodes.php' ;
 };
 
-if(file_exists(__DIR__ . '/libs/edd_customization.php')){
-    require_once __DIR__ . '/libs/edd_customization.php';
-}
 
 
 //TMG Plugin Settings
@@ -171,8 +168,8 @@ function tf_swift_register_required_plugins() {
 
 	$plugins = array(
 		array(
-			'name'      => 'Easy Digital Downloads',
-			'slug'      => 'easy-digital-downloads',
+			'name'      => 'WordPress Download Manager',
+			'slug'      => 'download-manager',
 			'required'  => true,
 		),
 		array(

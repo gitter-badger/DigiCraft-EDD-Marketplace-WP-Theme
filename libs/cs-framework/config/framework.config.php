@@ -51,6 +51,41 @@ $options[]   = array(
 	)
 );
 
+// Slider Settings
+// ------------------------------
+$options[]   = array(
+	'name'     => 'slider_settings',
+	'title'    => 'Banner',
+	'icon'     => 'fa fa-sliders',
+	'fields'   => array(
+
+		array(
+			'id'      => 'slider_heading',
+			'type'    => 'text',
+			'title'   => 'Slider Heading',
+		),
+		array(
+			'id'      => 'slider_description',
+			'type'    => 'textarea',
+			'title'   => 'Slider Description',
+		),
+		array(
+			'id'      => 'slider_img',
+			'type'    => 'upload',
+			'title'   => 'Slider Image',
+		),
+		array(
+			'id'      => 'slider_button',
+			'type'    => 'text',
+			'title'   => 'slider_button_link',
+		),
+
+
+
+
+	)
+);
+
 // ------------------------------
 // Testimonial Section                     -
 // ------------------------------
@@ -84,12 +119,12 @@ $options[]   = array(
 				array(
 					'id'          => 'testimonial_designation',
 					'type'        => 'text',
-					'title'       => 'Designation',
+					'title'       => ' Designation',
 				),
 				array(
 					'id'          => 'testimonial_image',
 					'type'        => 'upload',
-					'title'       => 'User Image',
+					'title'       => 'Image',
 				),
 
 				array(

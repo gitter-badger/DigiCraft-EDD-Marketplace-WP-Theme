@@ -19,9 +19,6 @@ get_header();
  					<h2 class="product-header">
 						<?php the_title(); ?>
 					</h2>
-					<div class="breadcrumbs">
-
-					</div>
 	 			</div>
 	 		</div>
 	 	</div>
@@ -33,8 +30,8 @@ get_header();
 			<div class="row">
 				<div class="col-md-8">
 					<div class="product-details">
-					<div class="product-img">
-
+					<div class="product-img ">
+						<?php the_post_thumbnail();  ?>
                     </div>
                     <div class="product-description-content" >
 	                    <?php the_content(); ?>
@@ -49,9 +46,25 @@ get_header();
 					<div class="product-sidebar" >
 						<div class="price-widget widget" >
 							<div class="product-price text-center">
-								<?php echo do_shortcode('[edd_price]')?>
+<!--								price amount-->
                                 <div class="buy-button">
-								    <?php echo edd_get_purchase_link(get_the_ID()); ?>
+<!--                                    purchase button-->
+                                    <?php
+                                    $pack['ID'] = get_the_ID();
+                                    $pack['post_title'] = get_the_title();
+                                    $pack['post_content'] = get_the_content();
+                                    $pack['post_excerpt'] = get_the_excerpt();
+                                    $pack = wpdm_setup_package_data($pack);
+                                    ?>
+	                                <?php if(isset($pack['base_price'])&&$pack['base_price']>0){ ?>
+				                                <?php echo str_replace("btn-primary","btn-main",$pack['download_link']); ?>
+                                    <?php } ?>
+	                                <?php if(!isset($pack['base_price'])||$pack['base_price']==0){ ?>
+                                        <div class="text-center">
+			                                <?php echo str_replace(array("[btnclass]", "btn-main","<i class=''></i>"),array("btn btn-main btn-lg btn-block","btn btn-main btn-lg btn-block"),$pack['download_link']); ?>
+                                        </div>
+	                                <?php } ?>
+
                                 </div>
 							</div>
                         </div>
@@ -59,7 +72,7 @@ get_header();
                             <h4 class="widget-title"> Product Category</h4>
                             <ul>
 	                            <?php
-	                            $aa = get_the_terms(get_the_ID(), 'download_category');
+	                            $aa = get_the_terms(get_the_ID(), 'wpdmcategory');
 	                            if ($aa):
 		                            foreach($aa as $bb): ?>
                                         <li>
@@ -75,7 +88,7 @@ get_header();
                             <h4 class="widget-title"> Product Tags</h4>
                             <ul>
 								<?php
-									$aa = get_the_terms(get_the_ID(), 'download_tag');
+									$aa = get_the_terms(get_the_ID(), 'post_tag');
 									if ($aa):
                                     foreach($aa as $bb): ?>
                                     <li>
@@ -104,7 +117,7 @@ get_header();
 		    <div class="row">
 		       <?php
 		        $args = array(
-		            'post_type' => 'download',
+		            'post_type' => 'wpdmpro',
 		            'posts_per_page' => 3,
 		            'category__in'  => wp_get_post_categories($post->ID),
 		            'orderby'   =>'rand',
@@ -125,7 +138,7 @@ get_header();
                             </div>
                             <div class="content">
                                 <div class="product-meta">
-                                    <span class="price"> <i class="tf-pricetags"></i><?php echo do_shortcode('[edd_price]')  ?></span>
+                                    <span class="price"> <i class="tf-pricetags"></i></span>
                                     <a class="author" href=""><i class="tf-profile-male"></i><?php the_author();  ?></a>
                                 </div>
                                 <h4><a href="<?php the_permalink();  ?>"><?php the_title();  ?></a></h4>
